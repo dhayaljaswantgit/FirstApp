@@ -7,6 +7,10 @@ export default function* loginSaga() {
 }
 
 function* login(action) {
+  yield put({
+    type: types.LOADER_START,
+  });
+
   try {
     const result = yield axios.post(
       'https://reqres.in/api/login',
@@ -18,11 +22,17 @@ function* login(action) {
       type: types.LOGIN_START_SUCCESS,
       payload: result.data,
     });
+    yield put({
+      type: types.LOADER_STOP,
+    });
   } catch (error) {
     console.log('Saga error => ', error);
     yield put({
       type: types.LOGIN_START_FAIL,
       payload: error,
+    });
+    yield put({
+      type: types.LOADER_STOP,
     });
   }
 }

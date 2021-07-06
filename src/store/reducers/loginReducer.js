@@ -6,8 +6,8 @@ const INITIAL_STATE = {
   error: null,
 };
 
-export default (state = INITIAL_STATE, actions) => {
-  switch (actions.types) {
+export default (state = INITIAL_STATE, action) => {
+  switch (action.type) {
     case types.LOGIN_START:
       return {
         ...state,
@@ -19,14 +19,14 @@ export default (state = INITIAL_STATE, actions) => {
       return {
         ...state,
         ...INITIAL_STATE,
-        success: actions.payload,
+        success: action.payload,
       };
 
     case types.LOGIN_START_FAIL:
       return {
         ...state,
         ...INITIAL_STATE,
-        error: actions.payload,
+        error: action.payload,
       };
 
     default:

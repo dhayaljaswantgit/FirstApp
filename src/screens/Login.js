@@ -4,6 +4,7 @@ import {SafeAreaView, Text, TextInput, StyleSheet, Button} from 'react-native';
 import {connect} from 'react-redux';
 import STYLES from '../utils/styles';
 import {initLogin} from '../store/actions/loginAction';
+import Loader from '../components/Loader';
 
 class Login extends Component {
   state = {
@@ -11,18 +12,6 @@ class Login extends Component {
     password: 'cityslicka',
     isLoggedIn: false,
     hasError: false,
-  };
-
-  doLogin = () => {
-    axios
-      .post('https://reqres.in/api/login', this.state)
-      .then(success => {
-        this.setState({isLoggedIn: true, hasError: false});
-      })
-      .catch(error => {
-        this.setState({isLoggedIn: false, hasError: true});
-        console.log('Error => ', error);
-      });
   };
 
   render() {
@@ -45,38 +34,40 @@ class Login extends Component {
     }
 
     return (
-      <SafeAreaView style={[STYLES.main, styles.main]}>
-        <Text style={styles.logo}>Logo</Text>
-        <TextInput
-          value={email}
-          style={styles.input}
-          placeholder="Enter Email"
-          onChangeText={value => this.setState({email: value})}
-        />
-        <TextInput
-          value={password}
-          style={styles.input}
-          secureTextEntry
-          placeholder="Enter Password"
-          onChangeText={value => this.setState({password: value})}
-        />
-        <Button
-          title="Login"
-          onPress={() => this.props.initLogin(this.state)}
-        />
-      </SafeAreaView>
+      <>
+        <SafeAreaView style={[STYLES.main, styles.main]}>
+          <Text style={styles.logo}>Logo</Text>
+          <TextInput
+            value={email}
+            style={styles.input}
+            placeholder="Enter Email"
+            onChangeText={value => this.setState({email: value})}
+          />
+          <TextInput
+            value={password}
+            style={styles.input}
+            secureTextEntry
+            placeholder="Enter Password"
+            onChangeText={value => this.setState({password: value})}
+          />
+          <Button
+            title="Login"
+            onPress={() => this.props.initLogin(this.state)}
+          />
+        </SafeAreaView>
+      </>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    loading: state.loginReducer.loading,
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     loading: state.loginReducer.loading,
+//   };
+// };
 
 // export default Login;
-export default connect(mapStateToProps, {initLogin})(Login);
+export default connect(null, {initLogin})(Login);
 
 const styles = StyleSheet.create({
   main: {

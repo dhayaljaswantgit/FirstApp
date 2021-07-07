@@ -1,16 +1,10 @@
 import axios from "axios";
 import React, { Component } from "react";
-import {
-  SafeAreaView,
-  Text,
-  TextInput,
-  StyleSheet,
-  Button,
-} from "react-native";
+import { SafeAreaView, Text, TextInput, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import STYLES from "../utils/styles";
 import { initLogin } from "../store/actions/loginAction";
-import Loader from "../components/Loader";
+import { Button } from "../components";
 
 class Login extends Component {
   state = {

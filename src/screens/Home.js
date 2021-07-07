@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { SafeAreaView, Text, StyleSheet, Button } from "react-native";
+import { SafeAreaView, Text, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import STYLES from "../utils/styles";
-import { initLogout } from "../store/actions/loginAction";
+import { initLogout } from "../store/actions";
+import { Button } from "../components";
 
 class Home extends Component {
   render() {

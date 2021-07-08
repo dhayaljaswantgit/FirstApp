@@ -1,8 +1,9 @@
-import * as types from '../actionTypes';
+import * as types from "../actionTypes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const INITIAL_STATE = {
   loading: false,
-  success: null,
+  user: null,
   error: null,
 };
 
@@ -16,10 +17,11 @@ export default (state = INITIAL_STATE, action) => {
       };
 
     case types.LOGIN_START_SUCCESS:
+      AsyncStorage.setItem("userData", JSON.stringify(action.payload));
       return {
         ...state,
         ...INITIAL_STATE,
-        success: action.payload,
+        user: action.payload,
       };
 
     case types.LOGIN_START_FAIL:
@@ -27,6 +29,21 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         ...INITIAL_STATE,
         error: action.payload,
+      };
+
+    case types.LOGOUT:
+      AsyncStorage.removeItem("userData");
+      return {
+        ...state,
+        ...INITIAL_STATE,
+        user: null,
+      };
+
+    case types.SET_USER_DATA:
+      return {
+        ...state,
+        ...INITIAL_STATE,
+        user: action.payload,
       };
 
     default:

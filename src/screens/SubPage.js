@@ -13,12 +13,18 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {Button} from '../components';
 import ImagePicker from 'react-native-image-crop-picker';
 import RNLocation from 'react-native-location';
+import MapView from 'react-native-maps';
+import {Marker} from 'react-native-maps';
 
 const {width} = Dimensions.get('screen');
 export default class SubPage extends Component {
   state = {
     images: [],
   };
+
+  componentDidMount() {
+    this.getLocation();
+  }
 
   pickImage = () => {
     ImagePicker.openPicker({
@@ -93,6 +99,24 @@ export default class SubPage extends Component {
         </View>
         <Button title="Get My Location" onPress={this.getLocation} />
         {location && <Text>{JSON.stringify(location)}</Text>}
+        <View style={styles.mapUpper}>
+          <MapView
+            style={STYLES.main}
+            initialRegion={{
+              latitude: 37.785834,
+              longitude: -122.406417,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421,
+            }}>
+            {location && (
+              <Marker
+                coordinate={location}
+                title={'Marker Title'}
+                description={'Marker Description'}
+              />
+            )}
+          </MapView>
+        </View>
       </ScrollView>
     );
   }
@@ -113,4 +137,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  mapUpper: {width: '100%', height: 400, backgroundColor: 'red'},
 });

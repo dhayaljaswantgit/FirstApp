@@ -1,18 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { View, Text } from "react-native";
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {View, Text} from 'react-native';
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import Login from "../screens/Login";
-import Home from "../screens/Home";
-import Loader from "../components/Loader";
-import { setUserData } from "../store/actions";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import SubPage from "./SubPage";
-import { Button } from "../components";
+import Login from '../screens/Login';
+import Home from '../screens/Home';
+import Loader from '../components/Loader';
+import {setUserData} from '../store/actions';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import SubPage from './SubPage';
+import ListPage from './ListPage';
+import {Button} from '../components';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 class Auth extends Component {
@@ -21,21 +22,21 @@ class Auth extends Component {
   };
 
   componentDidMount() {
-    AsyncStorage.getItem("userData")
-      .then((data) => {
-        this.setState({ loading: false });
+    AsyncStorage.getItem('userData')
+      .then(data => {
+        this.setState({loading: false});
         if (data) {
           this.props.setUserData(JSON.parse(data));
         }
       })
       .catch(() => {
-        this.setState({ loading: false });
+        this.setState({loading: false});
       });
   }
 
   render() {
-    const { loading } = this.state;
-    const { user } = this.props;
+    const {loading} = this.state;
+    const {user} = this.props;
 
     if (loading) {
       return <Loader loading={loading} />;
@@ -46,11 +47,12 @@ class Auth extends Component {
         {user ? (
           <Stack.Navigator>
             <Stack.Screen
-              options={{ headerShown: false }}
+              options={{headerShown: false}}
               name="Home"
               component={HomeScreen}
             />
             <Stack.Screen name="SubPage" component={SubPage} />
+            <Stack.Screen name="ListPage" component={ListPage} />
           </Stack.Navigator>
         ) : (
           <Stack.Navigator>
@@ -68,15 +70,15 @@ class Auth extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     user: state.loginReducer.user,
   };
 };
 
-export default connect(mapStateToProps, { setUserData })(Auth);
+export default connect(mapStateToProps, {setUserData})(Auth);
 
-function HomeScreen({ navigation }) {
+function HomeScreen({navigation}) {
   return (
     <Drawer.Navigator initialRouteName="Home">
       <Drawer.Screen name="Home" component={Home} />
@@ -86,20 +88,20 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function MenuPage1({ navigation }) {
+function MenuPage1({navigation}) {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>MenuPage1</Text>
-      <Button title="Home" onPress={() => navigation.navigate("Home")} />
+      <Button title="Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 }
 
-function MenuPage2({ navigation }) {
+function MenuPage2({navigation}) {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Text>MenuPage2</Text>
-      <Button title="Home" onPress={() => navigation.navigate("Home")} />
+      <Button title="Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
 }

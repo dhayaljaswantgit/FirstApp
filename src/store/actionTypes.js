@@ -1,12 +1,16 @@
-export const LOGIN_START = "LOGIN_START";
-export const LOGIN_START_SUCCESS = "LOGIN_START_SUCCESS";
-export const LOGIN_START_FAIL = "LOGIN_START_FAIL";
+export const LOGIN_START = 'LOGIN_START';
+export const LOGIN_START_SUCCESS = 'LOGIN_START_SUCCESS';
+export const LOGIN_START_FAIL = 'LOGIN_START_FAIL';
 
-export const LOGOUT = "LOGOUT";
-export const SET_USER_DATA = "SET_USER_DATA";
+export const LOGOUT = 'LOGOUT';
+export const SET_USER_DATA = 'SET_USER_DATA';
 
-export const LOADER_START = "LOADER_START";
-export const LOADER_STOP = "LOADER_STOP";
+export const LOADER_START = 'LOADER_START';
+export const LOADER_STOP = 'LOADER_STOP';
 
-export const SHOW_TOAST = "SHOW_TOAST";
-export const HIDE_TOAST = "HIDE_TOAST";
+export const SHOW_TOAST = 'SHOW_TOAST';
+export const HIDE_TOAST = 'HIDE_TOAST';
+
+export const GET_LIST_DATA_START = 'GET_LIST_DATA_START';
+export const GET_LIST_DATA_SUCCESS = 'GET_LIST_DATA_SUCCESS';
+export const GET_LIST_DATA_FAIL = 'GET_LIST_DATA_FAIL';
